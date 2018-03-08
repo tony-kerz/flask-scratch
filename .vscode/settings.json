@@ -1,0 +1,9 @@
+{
+  "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
+  "python.formatting.provider": "yapf",
+  "python.unitTest.pyTestArgs": ["tests"],
+  "python.unitTest.pyTestEnabled": false,
+  "python.unitTest.promptToConfigure": false,
+  "python.unitTest.unittestEnabled": false,
+  "python.unitTest.nosetestsEnabled": false
+}

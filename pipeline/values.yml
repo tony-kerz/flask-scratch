@@ -1,0 +1,15 @@
+containers:
+  - name: mongo
+    image: mongo:3.7
+external: false
+internalPort: 8000
+ingress:
+  enabled: true
+env:
+  DB_HOST: svc-cat-mongodb.default.svc.cluster.local
+  # MONGO_REPLICA_SET: rs0
+  DB_NAME: people-{{env}}
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi

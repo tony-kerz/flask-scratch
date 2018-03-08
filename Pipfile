@@ -1,0 +1,22 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+pymongo = "*"
+python-box = "*"
+pydash = "*"
+pyyaml = "*"
+faker = "*"
+flask = "*"
+
+
+[dev-packages]
+
+pytest = "*"
+pylint = "*"
+yapf = "*"
