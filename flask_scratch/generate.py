@@ -1,23 +1,27 @@
-import asyncio
 import logging
 from faker import Faker
-from motor.motor_asyncio import AsyncIOMotorClient
+from flask_scratch import db
+# from pymongo import MongoClient
 from .config import config
+import json
 
 log = logging.getLogger(__name__)
 fake = Faker()
 
+
 # pylint: disable=no-member
 
 
-async def generate():
-    url = f"mongodb://{config.db.host}"
-    log.info(f"url={url}, name={config.db.name}")
-    client = AsyncIOMotorClient(url)
-    db = client[config.db.name]
+def generate():
+    # url = f"mongodb://{config.db.host}"
+    # log.info(f"url={url}, name={config.db.name}")
+    # client = MongoClient(url)
+    # db = client[config.db.name]
     collect = db.people
+    total = config.generate.total
     thresh = config.generate.thresh
-    for i in range(int(config.generate.total)):
+    log.info(f"total={total}, thresh={thresh}")
+    for i in range(int(total)):
         doc = {
             'name': {
                 'first': fake.first_name(),
@@ -33,10 +37,8 @@ async def generate():
             'phone': fake.phone_number(),
             'ssn': fake.ssn()
         }
-        result = await collect.insert_one(doc)
-        if i and i % thresh == 0:
-            log.info(f"completed insert batch, total={i}")
-        # log.info(f"result={result}")
+        collect.insert_one(doc)
+        if i % thresh == 0:
+            i and log.info(f"completed insert batch, total={i}")
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(generate())
+generate()

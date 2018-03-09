@@ -1,6 +1,6 @@
 import logging
-from sanic_scratch.app import app
-from sanic_scratch.config import config
+from flask_scratch.app import app
+from flask_scratch.config import config
 
 log = logging.getLogger(__name__)
 

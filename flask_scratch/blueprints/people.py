@@ -1,7 +1,7 @@
-from sanic.response import json
-from sanic import Blueprint
+from flask import Blueprint, jsonify, request
 import logging
 from .helper import get_data
+from flask_scratch import db
 
 log = logging.getLogger(__name__)
 
@@ -11,16 +11,15 @@ def mapper(elt):
     return elt
 
 
-def get_blueprint(app):
-    bp = Blueprint(__name__)
+bp = Blueprint(__name__, __name__)
 
-    @bp.route('/')
-    async def index(request):
-        log.info(f"request={request}")
-        data, count = await get_data(args=request.raw_args, db=app.db, collection='people')
-        # data = await app.db.people.find({'address.zip': '87447'}).skip(0).limit(3).sort('name.last').to_list(3)
-        data = map(mapper, data)
-        headers = {'x-total-count': count} if count is not None else {}
-        return json(data, headers=headers)
 
-    return bp
+@bp.route('/')
+def index():
+    log.info(f"request={request}")
+    data, count = get_data(args=request.args, db=db, collection='people')
+    data = list(map(mapper, data))
+    log.info(f"data={data}")
+    res = jsonify(data)
+    res.headers = {'x-total-count': count} if count is not None else {}
+    return res
