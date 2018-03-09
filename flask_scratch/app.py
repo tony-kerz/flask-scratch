@@ -13,4 +13,5 @@ def index():
     log.info(f"request={request}")
     return jsonify({'hello': 'python'})
 
+
 app.register_blueprint(people_bp, url_prefix='/people')

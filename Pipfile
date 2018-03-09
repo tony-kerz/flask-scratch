@@ -13,6 +13,7 @@ pydash = "*"
 pyyaml = "*"
 faker = "*"
 flask = "*"
+gunicorn = "*"
 
 
 [dev-packages]

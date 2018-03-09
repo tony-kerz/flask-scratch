@@ -9,7 +9,10 @@ env:
   DB_HOST: svc-cat-mongodb.default.svc.cluster.local
   # MONGO_REPLICA_SET: rs0
   DB_NAME: people-{{env}}
+  GUNICORN_CMD_ARGS: --workers=2
 resources:
   limits:
     cpu: 500m
     memory: 512Mi
+entrypoint: gunicorn
+cmd: flask_scratch.app:app
