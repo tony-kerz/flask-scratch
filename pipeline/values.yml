@@ -14,5 +14,4 @@ resources:
   limits:
     cpu: 500m
     memory: 512Mi
-entrypoint: gunicorn
-cmd: flask_scratch.app:app
+
