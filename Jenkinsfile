@@ -2,4 +2,4 @@
 
 def pipeline = new com.aetna.jenkins.Pipeline()
 
-pipeline.generate()
+pipeline.exec()

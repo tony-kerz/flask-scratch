@@ -1,0 +1,5 @@
+FROM alpine
+ARG DFLT_ARGS
+RUN export ARGS
+ENV ARGS="$DFLT_ARGS $ARGS"
+RUN echo "args=$ARGS"
