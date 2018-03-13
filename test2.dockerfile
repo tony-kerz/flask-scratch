@@ -1,5 +1,10 @@
 FROM alpine
-ARG DFLT_ARGS
-RUN export ARGS
-ENV ARGS="$DFLT_ARGS $ARGS"
-RUN echo "args=$ARGS"
+RUN echo "foobar" > foobar.txt
+ARG ep=ls
+ENV ep=$ep
+RUN echo $ep
+ARG cm=-la
+ENV cm=$cm
+RUN echo $cm
+#ENTRYPOINT $ep
+CMD $ep $cm
